@@ -6,6 +6,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
 import cucumber.api.java.en.Given;
@@ -60,6 +61,30 @@ public class StepDefinitions  {
 	    System.out.println(title);
 	    Assert.assertEquals("CRMPRO", title);
 	    
+	}
+	
+	@Then("^user moves to new contact page$")
+	public void user_moves_to_new_contact_page() throws Throwable {
+		driver.switchTo().frame("mainpanel");
+	    Actions act = new Actions(driver);
+	    act.moveToElement(driver.findElement(By.xpath("//a[contains(text() ,'Contacts')]"))).build().perform();
+	    driver.findElement(By.xpath("//a[contains(text() ,'New Contact')]")).click();
+	}
+
+	@Then("^user enter contact details \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\"$")
+	public void user_enter_contact_details_and_and(String firstName, String lastName, String position) throws Throwable {
+		
+	   driver.findElement(By.id("first_name")).sendKeys(firstName);
+	   driver.findElement(By.id("surname")).sendKeys(lastName);
+	   driver.findElement(By.id("company_position")).sendKeys(position);
+	 //  driver.findElement(By.xpath("//*[@id=\"contactForm\"]/table/tbody/tr[1]/td/input[2]")).click();
+	   driver.findElement(By.xpath("//form[@id='contactForm']/table/tbody/tr/td/input[2]")).click();
+	 
+	}
+
+	@Then("^close the browser$")
+	public void close_the_browser() throws Throwable {
+	    driver.quit();
 	}
 
 }
