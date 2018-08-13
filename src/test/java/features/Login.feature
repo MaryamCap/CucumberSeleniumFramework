@@ -18,11 +18,16 @@
 #Sample Feature Definition Template
 Feature: Free CRM login test
 
-  Scenario: user login with valid username and password
+  Scenario Outline: user login with valid username and password
     Given user is already in  login page
     When title of login page is Free CRM
 #   Then user enters username and password
 #   writing data driven for username and password
-		Then user enters "naveenk" and "test@123" 
+		Then user enters "<username>" and "<password>" 
     Then user clicks on login button
     Then user is on home page
+    
+   Examples:
+   		|username|password|
+   		|neveenk |test@123|
+   		|tom		 |test4545|
