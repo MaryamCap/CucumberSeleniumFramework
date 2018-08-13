@@ -21,6 +21,8 @@ Feature: Free CRM login test
   Scenario: user login with valid username and password
     Given user is already in  login page
     When title of login page is Free CRM
-    Then user enters username and password
+#   Then user enters username and password
+#   writing data driven for username and password
+		Then user enters "naveenk" and "test@123" 
     Then user clicks on login button
     Then user is on home page
